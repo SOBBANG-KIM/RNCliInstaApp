@@ -1,8 +1,10 @@
-import { View, Text, StatusBar, ScrollView } from 'react-native'
 import React from 'react'
+import { View, Text, StatusBar, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
+
 import Stories from '../components/Stories'
 
 const HomeScreen = () => {

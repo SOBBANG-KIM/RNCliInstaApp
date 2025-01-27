@@ -10,16 +10,17 @@ import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+
+import Ionic from 'react-native-vector-icons/Ionicons';
+
 import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import ActivityScreen from './src/screens/ActivityScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
-
 import StatusScreen from './src/screens/StatusScreen';
 import FriendProfileScreen from './src/screens/FriendProfileScreen';
 import EditProfileScreen from './src/screens/EditProfileScreen';
 
-import Ionic from 'react-native-vector-icons/Ionicons';
 
 
 const App = () => {
