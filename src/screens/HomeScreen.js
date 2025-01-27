@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 
 import Stories from '../components/Stories'
+import Posts from '../components/Posts'
 
 const HomeScreen = () => {
   return (
@@ -46,6 +47,7 @@ const HomeScreen = () => {
 
       <ScrollView>
         <Stories />
+        <Posts />
       </ScrollView>
     </SafeAreaView>
   )
