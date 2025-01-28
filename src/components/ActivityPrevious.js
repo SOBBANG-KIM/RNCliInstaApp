@@ -24,7 +24,7 @@ const ActivityPrevious = ({data}) => {
               maxWidth: '64%',
             }}
             onPress={() => {
-              navigation.push('FriendsProfile', data)
+              navigation.push('FriendProfile', data)
             }}
           > 
             <Image source={data.profileImage} style={{
