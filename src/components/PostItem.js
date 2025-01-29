@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, Platform } from 'react-native'
 import React, { useState } from 'react'
 
 import Feather from 'react-native-vector-icons/Feather'
@@ -6,35 +6,55 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionic from 'react-native-vector-icons/Ionicons'
 
 import PushNotification from "react-native-push-notification";
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 const PostItem = ({ data }) => {
 
   const [like, setLike] = useState(data.isLiked);
 
   const handlerNotification = (title) => {
-    PushNotification.getChannels(channel_ids => {
-      console.log(channel_ids);
-    });
+    if (Platform.OS === 'ios') {
+      console.log('ios')
 
-    PushNotification.cancelAllLocalNotifications();
+      PushNotificationIOS.addNotificationRequest({
+        id: 'insta-channel',
+        title: `${title} 을 클릭했습니다`,
+        body: '메세지 입니다.',
+      });
 
-    // default
-    // PushNotification.localNotification({
-    //   channelId: 'insta-channel',
-    //   title: `${title} 을 클릭했습니다`,
-    //   message: title,
-    //   bigText: 'My BigText 샬라샬라 가나다라마바사아자차카타파하라라라루루루루',
-    //   color: 'red',
+      // PushNotificationIOS.addNotificationRequest({
+      //   id: 'insta-channel',
+      //   title: `${title} 을 클릭했습니다`,
+      //   body: '메세지 입니다.',
+      //   fireDate: new Date(Date.now() + 5 * 1000),
+      // });
+
+    } else {
+    // PushNotification.getChannels(channel_ids => {
+    //   console.log(channel_ids);
     // });
 
-    // schedule
-    PushNotification.localNotificationSchedule({
-      channelId: 'insta-channel',
-      title: `${title} 을 클릭했습니다`,
-      message: title,
-      date: new Date(Date.now() + 5 * 1000),
-      allowWhileIdle: true,
-    });
+      PushNotification.cancelAllLocalNotifications();
+
+      // default
+      PushNotification.localNotification({
+        channelId: 'insta-channel',
+        title: `${title} 을 클릭했습니다`,
+        message: title,
+        bigText: 'My BigText 샬라샬라 가나다라마바사아자차카타파하라라라루루루루',
+        color: 'red',
+      });
+
+      // schedule
+      // PushNotification.localNotificationSchedule({
+      //   channelId: 'insta-channel',
+      //   title: `${title} 을 클릭했습니다`,
+      //   message: title,
+      //   date: new Date(Date.now() + 5 * 1000),
+      //   allowWhileIdle: true,
+      // });
+    }
+  
   };
 
   return (
