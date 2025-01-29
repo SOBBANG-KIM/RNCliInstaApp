@@ -5,9 +5,37 @@ import Feather from 'react-native-vector-icons/Feather'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionic from 'react-native-vector-icons/Ionicons'
 
+import PushNotification from "react-native-push-notification";
+
 const PostItem = ({ data }) => {
 
   const [like, setLike] = useState(data.isLiked);
+
+  const handlerNotification = (title) => {
+    PushNotification.getChannels(channel_ids => {
+      console.log(channel_ids);
+    });
+
+    PushNotification.cancelAllLocalNotifications();
+
+    // default
+    // PushNotification.localNotification({
+    //   channelId: 'insta-channel',
+    //   title: `${title} 을 클릭했습니다`,
+    //   message: title,
+    //   bigText: 'My BigText 샬라샬라 가나다라마바사아자차카타파하라라라루루루루',
+    //   color: 'red',
+    // });
+
+    // schedule
+    PushNotification.localNotificationSchedule({
+      channelId: 'insta-channel',
+      title: `${title} 을 클릭했습니다`,
+      message: title,
+      date: new Date(Date.now() + 5 * 1000),
+      allowWhileIdle: true,
+    });
+  };
 
   return (
     <View 
@@ -26,10 +54,12 @@ const PostItem = ({ data }) => {
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-          <Image 
-            source={data.postPersonImage} 
-            style={{ width: 40, height: 40, borderRadius: 100, }}
-          />
+          <TouchableOpacity onPress={() => handlerNotification(data.postTitle)}>
+            <Image 
+              source={data.postPersonImage} 
+              style={{ width: 40, height: 40, borderRadius: 100, }}
+              />
+          </TouchableOpacity>
           <View style={{ paddingLeft: 5 }}>
             <Text style={{ fontSize: 15, fontWeight: 'bold', }} >
               {data.postTitle}

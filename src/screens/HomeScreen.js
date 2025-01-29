@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StatusBar, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -8,7 +8,22 @@ import Feather from 'react-native-vector-icons/Feather'
 import Stories from '../components/Stories'
 import Posts from '../components/Posts'
 
+import PushNotification from "react-native-push-notification";
+
 const HomeScreen = () => {
+
+  useEffect(() => {
+    createChannel();
+  }, []);
+
+  const createChannel = () => {
+    console.log('createChannel')
+    PushNotification.createChannel({
+      channelId: 'insta-channel',
+      channelName: 'Insta Channel',
+    });
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: 'white'}}>
       <StatusBar 
